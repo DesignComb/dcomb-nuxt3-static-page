@@ -1,0 +1,1 @@
+import{u as i,a as c}from"./index.702aae7d.js";import{l as _,G as p,f as u,t as o,g as s}from"./entry.f1cc57f8.js";const h=_({__name:"[id]",async setup(m){let t,a;const e=p(),n=i(),{data:r,error:f}=([t,a]=u(()=>c("notionPage",()=>n.fetchNotionPage(e.params.id))),t=await t,a(),t);return(d,g)=>" 123 "+o(s(e).params.id)+" "+o(s(r))}});export{h as default};
