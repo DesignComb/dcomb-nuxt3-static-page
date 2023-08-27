@@ -1,5 +1,6 @@
 import type { Theme } from '@unocss/preset-mini'
 import { defineConfig, presetAttributify, presetIcons, presetUno } from 'unocss'
+import { presetWebFonts } from 'unocss'
 
 export default defineConfig({
     shortcuts: [
@@ -55,6 +56,13 @@ export default defineConfig({
         presetAttributify(),
         presetIcons({
             scale: 1.2,
+        }),
+        presetWebFonts({
+            provider: 'google',
+            fonts:{
+                noto:'Noto Sans TC',
+                Orbitron:'Orbitron'
+            }
         }),
     ],
     content: {

@@ -1,10 +1,16 @@
+import notionJSON2HTML from "~/utils/notionJSON2HTML";
+
 interface NotionDBType {
+    results?: any[];
+}
+interface NotionPageBlockType {
     results?: any[];
 }
 export const useMainStore = defineStore('main', {
     state: () => ({
         notionDB: null as NotionDBType | null,
-        notionPage: {}
+        notionPage: {},
+        notionPageBlock: null as NotionPageBlockType | null,
     }),
     actions: {
         async fetchNotionDB() {
@@ -22,7 +28,7 @@ export const useMainStore = defineStore('main', {
             return data
         },
         async fetchNotionPage(pageID: string) {
-            const data = await $fetch(`https://api.notion.com/v1/blocks/${pageID}/children?page_size=999`, {
+            const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
                 method: 'GET',
                 credentials: 'include',
                 headers: {
@@ -35,6 +41,20 @@ export const useMainStore = defineStore('main', {
             }
             return data
         },
+        async fetchNotionPageBlock(pageID: string) {
+            const data = await $fetch(`https://api.notion.com/v1/blocks/${pageID}/children?page_size=999`, {
+                method: 'GET',
+                credentials: 'include',
+                headers: {
+                    Accept: 'application/json',
+                    'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
+                }
+            })
+            if (data) {
+                this.notionPageBlock = data
+            }
+            return data
+        },
     },
     getters: {
         getDBItemArr(): any {
@@ -42,5 +62,9 @@ export const useMainStore = defineStore('main', {
                 return this.notionDB?.results
             }
         },
+        getNotionPageBlockHtml() : any{
+            // const json: notionBlock[] = this.notionPageBlock?.results
+            return this.notionPageBlock?.results?.map(notionJSON2HTML).join('');
+        }
     }
 })
