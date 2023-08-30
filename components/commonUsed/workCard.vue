@@ -10,7 +10,7 @@
                       stroke-dashoffset='0' stroke-linecap='square'/>
             </svg>
         </div>
-        <div class="absolute w-full h-full bg-black moving-bg"></div>
+        <div class="absolute w-full max-w-128 h-full bg-black moving-bg"></div>
         <div class="max-w-128 relative min-h-[16rem] h-full w-full text-left bg-white border-2 border-black border-solid shadow-md">
             <div id="image-container"
                  class="relative w-full pb-[56.25%] overflow-hidden border-0 border-solid border-b-1">

@@ -20,6 +20,14 @@ export const useMainStore = defineStore('main', {
                 headers: {
                     Accept: 'application/json',
                     'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
+                },
+                body:{
+                    sorts: [
+                        {
+                            "property": "Sort",
+                            "direction": "ascending"
+                        }
+                    ]
                 }
             })
             if (data) {

@@ -11,6 +11,7 @@ html, body {
     box-sizing: border-box;
     line-height: 1.5;
     color:#666666;
+    vertical-align: sub;
 }
 
 div {
@@ -36,7 +37,9 @@ a:hover {
     box-sizing: border-box;
     font-family:'Noto Sans TC', sans-serif;
 }
-
+* {
+    font-size: 20px;
+}
 @media (max-width: 1440px) {
     * {
         font-size: 18px;
