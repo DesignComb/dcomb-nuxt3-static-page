@@ -1,23 +1,30 @@
 type NotionText = {
-    plain_text: string;
+    plain_text: string
 };
 type NotionFile = {
-    type: string;
+    type: string
     external:{
         url:string
     }
 };
+type NotionMultiSelect = {
+    id: string
+    name:string
+};
 type NotionItem = {
     properties: {
         Name?: {
-            title: NotionText[];
-        };
+            title: NotionText[]
+        }
         Text?: {
-            text: NotionText[];
-        };
+            text: NotionText[]
+        }
         ProjectImage?:{
-            files: NotionFile[];
-        };
+            files: NotionFile[]
+        }
+        Tags?:{
+            multi_select:NotionMultiSelect[]
+        }
     };
 };
 export const getItemCover = (item:any) => {
@@ -46,11 +53,17 @@ export const getItemCover = (item:any) => {
         return ''
     }
 }
-export const getItemProjectImage = (item:any) => {
-    const imgObj = item?.properties?.ProjectImage?.files
-    return imgObj.map((item:NotionFile) => {
-        return item.external.url
-    })
+export const getItemProjectImage = (notionItem: NotionItem) => {
+    // if(item?.properties?.ProjectImage?.files){
+    //     return item?.properties?.ProjectImage?.files?.map((item:NotionFile) => {
+    //         return item?.external.url
+    //     })
+    // }
+    // else {
+    //     return ''
+    // }
+    return notionItem?.properties?.ProjectImage?.files.map(item => item.external.url) || [];
+
 }
 export const getItemTitleText = (notionItem: NotionItem) => {
     return notionItem?.properties?.Name?.title.map(item => item.plain_text).join('') || '';
@@ -58,4 +71,8 @@ export const getItemTitleText = (notionItem: NotionItem) => {
 
 export const getItemText = (notionItem: NotionItem) => {
     return notionItem?.properties?.Text?.text.map(item => item.plain_text.replace(/\n/g,"<br>")).join('') || '';
+}
+
+export const getItemTagIds = (notionItem: NotionItem) => {
+    return notionItem?.properties?.Tags?.multi_select.map(item => item.id);
 }
