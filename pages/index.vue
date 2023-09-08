@@ -69,17 +69,17 @@ watch(headerIsSwiping ,()=>{
 
                 <div ref="mobileHeader" class="md:hidden absolute top-0 translate-y-[-100%] w-full h-1/3 bg-comb:85 z-30">
                     <div class="max-w-content px-12 py-12 flex-col justify-end">
-                        <nuxt-link to="/contact" class="relative mr-6 decoration-clip-border">
+                        <nuxt-link to="/" class="relative mr-6 decoration-clip-border">
                             <div class="italic font-bold text-4xl tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
                                 About
                             </div>
                         </nuxt-link>
-                        <nuxt-link to="/contact" class="relative mr-6 decoration-clip-border">
+                        <nuxt-link to="/" class="relative mr-6 decoration-clip-border">
                             <div class="italic font-bold text-4xl tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
                                 Projects
                             </div>
                         </nuxt-link>
-                        <nuxt-link to="/contact" class="relative mr-6 decoration-clip-border">
+                        <nuxt-link to="/" class="relative mr-6 decoration-clip-border">
                             <div class="italic font-bold text-4xl tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
                                 Contact
                             </div>
