@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="absolute flex right-10 top-14 w-72 h-32 scale-70 sm:scale-110">
+    <div class="absolute flex right-10 top-14 w-72 h-32 scale-70 md:scale-110">
         <img class="w-32 absolute left-12 an-left z-20" src="/hexagon-outline.svg" alt="hexagon">
         <img class="h-6.5rem absolute top-1 left-7.1rem  an-center" src="/yellow-diamond.svg" alt="diamond">
         <img class="w-32 absolute right-12 an-right z-20" src="/hexagon-outline.svg" alt="hexagon">

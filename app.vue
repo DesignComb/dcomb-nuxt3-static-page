@@ -1,25 +1,23 @@
 <script setup>
-import {useScroll, watchDeep, whenever} from '@vueuse/core'
+import {useScroll, watchDeep, whenever, useWindowScroll} from '@vueuse/core'
 import {useAnimate} from "@vueuse/core/index";
 
 const main = ref()
 const header = ref()
-const {x, y, isScrolling, arrivedState, directions} = useScroll(main)
+const {directions} = useScroll(main)
+const {x, y} = useWindowScroll()
 
-
-console.log(directions.top)
-watch(directions, () => {
-        if (directions.bottom) {
-            useAnimate(header,  [
-                { opacity: '0',transform: 'translateY(-100%)' },
-            ], {
-                duration: 400,
-                fill: 'forwards'
-            })
-        }
-        else if(directions.top){
-            useAnimate(header,  [
-                { opacity: '1',transform: 'translateY(0)' },
+watch(y, (oV, nV) => {
+        if (oV > nV) {
+            // useAnimate(header, [
+            //     {opacity: '0', transform: 'translateY(-100%)'},
+            // ], {
+            //     duration: 400,
+            //     fill: 'forwards'
+            // })
+        } else if (oV < nV) {
+            useAnimate(header, [
+                {opacity: '1', transform: 'translateY(0)'},
             ], {
                 duration: 400,
                 fill: 'forwards'
@@ -32,18 +30,26 @@ watch(directions, () => {
 </script>
 
 <template>
-    <div ref="main" class="m-0 p-0 h-screen overflow-x-hidden text-center">
-        <common-used-marquee/>
-        <div ref="header" class="w-full bg-red-400 fixed z-50">
-            這是Header
-            <common-used-fixed-header/>
-        </div>
-        <NuxtPage class="font-noto"/>
+
+    <div ref="header"
+         :class="y === 0?'bg-transparent':'bg-white shadow-lg'"
+         class="w-full hidden md:block fixed z-50 transition-all ease-in-out duration-400">
+        <common-used-fixed-header/>
+    </div>
+    <div ref="main" class="m-0 p-0 text-center">
+        <!--        <common-used-marquee/>-->
+
+        <NuxtPage class="font-noto mt-4"/>
+    </div>
+    <div>
+        <common-used-footer/>
     </div>
 </template>
 
 <style>
-
+*{
+    box-sizing: border-box;
+}
 html, body {
     margin: 0;
     padding: 0;
@@ -51,6 +57,8 @@ html, body {
     line-height: 1.5;
     color: #666666;
     vertical-align: sub;
+    min-width: 100%;
+    min-height: 100vh;
 }
 
 div {
@@ -70,11 +78,10 @@ a:hover {
 #__nuxt {
     margin: 0;
     padding: 0;
-    max-width: 100vw;
-    height: 100vh;
     text-align: center;
     box-sizing: border-box;
     font-family: 'Noto Sans TC', sans-serif;
+    overflow-x: hidden;
 }
 
 * {

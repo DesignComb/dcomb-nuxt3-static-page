@@ -6,8 +6,8 @@
         <div class="absolute w-full h-full scale-105">
             <svg width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'>
                 <rect class="moving-dashed-border" width='100%' height='100%' fill='none' stroke='#fcba03'
-                      stroke-width='4' stroke-dasharray='150'
-                      stroke-dashoffset='0' stroke-linecap='square'/>
+                      stroke-width='25' stroke-dasharray='15% 185%'
+                      stroke-dashoffset='5%' stroke-linecap='square'/>
             </svg>
         </div>
         <div class="absolute w-full max-w-128 h-full bg-black moving-bg"></div>
@@ -39,7 +39,7 @@
 
 @keyframes movingDashedBorder {
     to {
-        stroke-dashoffset: 300;
+        stroke-dashoffset: 205%;
     }
 }
 
@@ -49,8 +49,8 @@
 
 .moving-container:hover .moving-dashed-border {
     opacity: 1;
-    animation: movingDashedBorder 3s infinite;
-
+    animation: movingDashedBorder 4s infinite;
+    animation-timing-function: ease-in-out;
 }
 
 .moving-container .moving-bg {

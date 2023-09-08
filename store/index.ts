@@ -1,20 +1,10 @@
-import notionJSON2HTML from "~/utils/notionJSON2HTML";
-import {computed} from "vue/dist/vue";
-import {getItemTagIds} from "~/utils/notionTransformData";
-
-interface NotionDBType {
-    results?: any[];
-}
-
-interface NotionPageBlockType {
-    results?: any[];
-}
+import {NotionDB, NotionPage} from '@/utils/types/notionTypes'
 
 export const useMainStore = defineStore('main', {
     state: () => ({
-        notionDB: null as NotionDBType | null,
-        notionPage: {},
-        notionPageBlock: null as NotionPageBlockType | null,
+        notionDB: null as NotionDB | null,
+        notionPage: null as NotionPage | null,
+        // notionPageBlock: null as NotionPage | null,
     }),
     actions: {
         async fetchNotionDB() {
@@ -35,11 +25,11 @@ export const useMainStore = defineStore('main', {
                 }
             })
             if (data) {
-                this.notionDB = data
+                this.notionDB = data as NotionDB
             }
             return data
         },
-        async fetchNotionPage(pageID: string) {
+        async fetchNotionPage(pageID: string): Promise<NotionPage>{
             const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
                 method: 'GET',
                 credentials: 'include',
@@ -49,34 +39,30 @@ export const useMainStore = defineStore('main', {
                 }
             })
             if (data) {
-                this.notionPage = data
+                this.notionPage = data as NotionPage
             }
-            return data
+            return data as NotionPage
         },
-        async fetchNotionPageBlock(pageID: string) {
-            const data = await $fetch(`https://api.notion.com/v1/blocks/${pageID}/children?page_size=999`, {
-                method: 'GET',
-                credentials: 'include',
-                headers: {
-                    Accept: 'application/json',
-                    'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
-                }
-            })
-            if (data) {
-                this.notionPageBlock = data
-            }
-            return data
-        },
+        // async fetchNotionPageBlock(pageID: string) {
+        //     const data = await $fetch(`https://api.notion.com/v1/blocks/${pageID}/children?page_size=999`, {
+        //         method: 'GET',
+        //         credentials: 'include',
+        //         headers: {
+        //             Accept: 'application/json',
+        //             'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
+        //         }
+        //     })
+        //     if (data) {
+        //         this.notionPageBlock = data
+        //     }
+        //     return data
+        // },
     },
     getters: {
         getDBItemArr(): any {
             if (this.notionDB) {
                 return this.notionDB?.results
             }
-        },
-        getNotionPageBlockHtml(): any {
-            // const json: notionBlock[] = this.notionPageBlock?.results
-            return this.notionPageBlock?.results?.map(notionJSON2HTML).join('');
         },
         getSimilarItems(): any {
             if (this.notionDB && this.notionPage) {
@@ -86,7 +72,7 @@ export const useMainStore = defineStore('main', {
                 // 2. 為每個 item 計算匹配的 tag 數量
                 const scoredItems = this.notionDB?.results?.map(item => {
                     const itemTags = getItemTagIds(item);
-                    const commonTagsCount = itemTags.filter(tag => currentPageTags.includes(tag)).length;
+                    const commonTagsCount = itemTags?.filter(tag => currentPageTags?.includes(tag)).length || 0
 
                     return {
                         item: item,
@@ -95,7 +81,7 @@ export const useMainStore = defineStore('main', {
                 });
                 // 3. 依據匹配的 tag 數量進行排序且過濾掉當前的 notionPage
                 const sortedItems = scoredItems.sort((a, b) => b.score - a.score)
-                    .filter(scoredItem => scoredItem.item.id !== this.notionPage.id)
+                    .filter(scoredItem => scoredItem.item.id !== this.notionPage?.id)
                     .map(scoredItem => scoredItem.item);
 
                 // 4. 返回匹配度最高的前三項

@@ -3,17 +3,8 @@ import {useMainStore} from "~/store"
 
 const store = useMainStore()
 
-const {data: notionDB, error} = await useAsyncData('notionDB', () => store.fetchNotionDB())
+await useAsyncData('notionDB', () => store.fetchNotionDB())
 
-import {useScroll} from '@vueuse/core'
-
-import { useWindowScroll } from '@vueuse/core'
-
-// const { x:windowX, y:windowY } = useWindowScroll()
-// const el = ref < HTMLElement | null >(null)
-// const el2 = ref < HTMLElement | null >(null)
-// const {x, y, isScrolling, arrivedState, directions} = useScroll(el)
-// const { y:actionY,} = useScroll(el2)
 import { invoke,until,useIntersectionObserver } from '@vueuse/core'
 
 const target = ref(null)
@@ -25,173 +16,193 @@ const { stop } = useIntersectionObserver(
         targetIsVisible.value = isIntersecting
     },
 )
-import { useAnimate } from '@vueuse/core'
+import { useAnimate, useSwipe, useScrollLock  } from '@vueuse/core'
 const el = ref()
 const el2 = ref()
+const mobileHeader = ref()
+const swiperDownDetector = ref()
+const isMobileHeader = ref(false)
+
+const {isSwiping, direction} = useSwipe(swiperDownDetector)
+const {isSwiping:headerIsSwiping, direction:headerSwipingDirection} = useSwipe(mobileHeader)
 
 invoke(async () => {
     await until(targetIsVisible).toBe(true)
-    useAnimate(el, { transform: 'translateX(-200%)' }, {
+    useAnimate(el, { transform: 'translateX(-200%) skewX(-45deg)' }, {
         duration: 800,
         fill:'forwards'
     })
-    useAnimate(el2, { transform: 'translateX(100%)' }, {
+    useAnimate(el2, { transform: 'translateX(100%) skewX(-45deg)' }, {
         duration: 800,
         fill:'forwards'
     })
 })
-// const {
-//     isSupported,
-//     animate,
-//
-//     // actions
-//     play,
-//     pause,
-//     reverse,
-//     finish,
-//     cancel,
-//
-//     // states
-//     pending,
-//     playState,
-//     replaceState,
-//     startTime,
-//     currentTime,
-//     timeline,
-//     playbackRate,
-// } = useAnimate(el, { transform: 'translateX(-200%)' }, {
-//     duration: 300,
-//     fill:'forwards'
-// })
+
+watch(isSwiping ,()=>{
+    if(direction.value === 'down'){
+        useAnimate(mobileHeader, { transform: 'translateY(0)' }, {
+            duration: 800,
+            fill:'forwards'
+        })
+        isMobileHeader.value = true
+        document.body.style.overflow = 'hidden';
+    }
+})
+watch(headerIsSwiping ,()=>{
+    if(headerSwipingDirection.value === 'up'){
+        useAnimate(mobileHeader, { transform: 'translateY(-100%)' }, {
+            duration: 800,
+            fill:'forwards'
+        })
+        setTimeout(()=>{
+            isMobileHeader.value = false
+            document.body.style.overflow = 'auto';
+        },500)
+    }
+})
+
 </script>
 <template>
-<!--    <div >-->
-<!--        <h1>{{ targetIsVisible }}</h1>-->
-<!--    </div>-->
-        <div class="w-full h-full flex flex-row flex-wrap justify-center items-center">
-            <div class="w-full h-full flex flex-row flex-wrap justify-center items-center bg-comb px-8 py-6 md:px-20 md:py-16">
-                <div class="w-full max-w-content h-full relative flex justify-center items-center bg-white border-solid border-#666 border-12px rounded-4.5rem">
-<!--                    <ClientOnly>-->
-<!--                        <animate-slogan-writing/>-->
-<!--                        <animate-two-hexagan-collapse/>-->
-<!--                        <animate-grey-hexagon/>-->
-<!--                    </ClientOnly>-->
-                    <img class="absolute right-12 bottom-12 h-72" src="/scrollLine.svg" alt="scrollLine">
-                    <div class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"></div>
+    <div class="w-full min-h-screen flex flex-row flex-wrap justify-center items-center">
+        <div class="w-full h-screen flex flex-row flex-wrap justify-center items-center bg-comb px-8 py-6 md:px-20 md:py-16">
+            <div class="w-full max-w-content h-full relative flex justify-center items-center bg-white border-solid overflow-hidden border-#666 border-12px rounded-4.5rem">
+
+                <div ref="mobileHeader" class="md:hidden absolute top-0 translate-y-[-100%] w-full h-1/3 bg-comb:85 z-30">
+                    <div class="max-w-content px-12 py-12 flex-col justify-end">
+                        <nuxt-link to="/contact" class="relative mr-6 decoration-clip-border">
+                            <div class="italic font-bold text-4xl tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
+                                About
+                            </div>
+                        </nuxt-link>
+                        <nuxt-link to="/contact" class="relative mr-6 decoration-clip-border">
+                            <div class="italic font-bold text-4xl tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
+                                Projects
+                            </div>
+                        </nuxt-link>
+                        <nuxt-link to="/contact" class="relative mr-6 decoration-clip-border">
+                            <div class="italic font-bold text-4xl tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
+                                Contact
+                            </div>
+                        </nuxt-link>
+                    </div>
+                    <div ref="swiperDownDetector" class="md:hidden absolute flex justify-center w-full text-center py-2 top-100%">
+                        <div :class="isMobileHeader ? 'i-bx-chevrons-up ' : 'i-bx-chevrons-down'"
+                            class="text-4xl transition-all duration-300 ease-in-out"></div>
+                    </div>
                 </div>
+                <ClientOnly>
+                    <animate-slogan-writing/>
+                    <animate-two-hexagan-collapse/>
+                    <animate-grey-hexagon/>
+                </ClientOnly>
+                <img class="absolute right-12 bottom-12 h-72" src="/scrollLine.svg" alt="scrollLine">
+                <div class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"></div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-content relative pt-24 z-20">
+            <div class="relative">
+                <div ref="el" class=" absolute translate-x-[-95%] skew-x-[-45deg] left-1/2 w-48 py-10 mt--8 bg-white flex justify-end z-30">
+                    <span class="font-black text-[3rem] text-[#666]">|</span>
+                </div>
+                <div ref="el2" class=" absolute left-1/2 w-48 skew-x-[-45deg] py-10 mt--8 bg-white flex justify-start z-30">
+                    <span class="font-black text-[3rem] text-[#666]">|</span>
+                </div>
+                <h1 class="font-black italic tracking-wide text-stroke-1 text-stroke-black font-Roboto text-[4rem] text-comb:25 z-10">Projects</h1>
+                <h1 class="font-black text-[4rem] text-[#666] translate-y-[-135%] z-20">作品</h1>
+                <div ref="target"></div>
             </div>
 
-            <div class="w-full max-w-content relative pt-24 z-20">
-                <!--            <div class="relative text-left scale-75 origin-l md:scale-100">-->
-                <!--                <h1 class="font-black text-[4.75rem] scale-y-80 op-70 text-[#999999] text-comb font-noto absolute -top-12 pl-6">-->
-                <!--                    〔</h1>-->
-                <!--                <h1 class="font-black font-noto text-comb op-70 pl-52">PROJECTS</h1>-->
-                <!--                <h1 class="font-black text-[4rem]  text-black absolute -top-12 pl-36">作品</h1>-->
-                <!--                <h1 class="font-black text-[4.75rem] scale-y-80 op-70 text-[#999999] text-comb font-noto absolute -top-12 pl-124">-->
-                <!--                    〕</h1>-->
-                <!--            </div>-->
-                <div class="relative">
-                    <div ref="el" class="absolute translate-x--3/4 left-1/2 w-48 py-10 mt--8 bg-white flex justify-end z-30">
-                        <span class="font-black text-[3rem] text-[#666]">／</span>
-                    </div>
-                    <div ref="el2" class="absolute left-1/2 w-48 py-10 mt--8 bg-white flex justify-start z-30">
-                        <span class="font-black text-[3rem] text-[#666]">／</span>
-                    </div>
-                    <h1 class="font-black italic tracking-wide text-stroke-1 text-stroke-black font-Roboto text-[4rem] text-comb:25 z-10">Projects</h1>
-                    <h1 class="font-black text-[4rem] text-[#666] translate-y-[-135%] z-20">作品</h1>
-                    <div ref="target"></div>
-                </div>
+            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
+                <a v-for="item in store.getDBItemArr" :href="`/works/${item.id}`" :key="item.id">
+                    <common-used-work-card>
+                        <template #cover>
+                            <img :src="getItemCover(item)" alt="cover"/>
+                        </template>
+                        <template #title>
+                            {{ getItemTitleText(item) }}
+                        </template>
+                        <template #tags>
+                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"
+                                 :class="`notion-bg-${tag.color}`"
+                                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
+                                {{ tag.name }}
+                            </div>
+                        </template>
+                    </common-used-work-card>
+                </a>
+            </div>
+        </div>
 
-                <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
-                    <a v-for="item in store.getDBItemArr" :href="`/works/${item.id}`" :key="item.id">
-                        <common-used-work-card>
-                            <template #cover>
-                                <img :src="getItemCover(item)" alt="cover"/>
-                            </template>
-                            <template #title>
-                                {{ getItemTitleText(item) }}
-                            </template>
-                            <template #tags>
-                                <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"
-                                     :class="`notion-bg-${tag.color}`"
-                                     class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
-                                    {{ tag.name }}
-                                </div>
-                            </template>
-                        </common-used-work-card>
-                    </a>
-                </div>
+        <div class="w-full max-w-content relative pt-24 z-20">
+            <div class="relative text-left scale-75 origin-l md:scale-100">
+                <h1 class="font-black text-[4.75rem] scale-y-80 op-70 text-[#999999] text-comb font-noto absolute -top-12 pl-6">
+                    〔</h1>
+                <h1 class="font-black font-noto text-comb op-70 pl-52">TEAM MEMBER</h1>
+                <h1 class="font-black text-[4rem]  text-black absolute -top-12 pl-36">成員</h1>
+                <h1 class="font-black text-[4.75rem] scale-y-80 op-70 text-[#999999] text-comb font-noto absolute -top-12 pl-140">
+                    〕</h1>
             </div>
 
-            <div class="w-full max-w-content relative pt-24 z-20">
-                <div class="relative text-left scale-75 origin-l md:scale-100">
-                    <h1 class="font-black text-[4.75rem] scale-y-80 op-70 text-[#999999] text-comb font-noto absolute -top-12 pl-6">
-                        〔</h1>
-                    <h1 class="font-black font-noto text-comb op-70 pl-52">TEAM MEMBER</h1>
-                    <h1 class="font-black text-[4rem]  text-black absolute -top-12 pl-36">成員</h1>
-                    <h1 class="font-black text-[4.75rem] scale-y-80 op-70 text-[#999999] text-comb font-noto absolute -top-12 pl-140">
-                        〕</h1>
+            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20">
+                <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
+                    <div id="image-container" title="嗨! 我是後端工程師 Hao"
+                         class="relative h-full pb-[100%] rounded-full overflow-hidden">
+                        <img src="/team-member-hao.png" alt="team-member-hao"/>
+                    </div>
+                    <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
+                        HAO
+                    </div>
                 </div>
-
-                <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20">
-                    <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
-                        <div id="image-container" title="嗨! 我是後端工程師 Hao"
-                             class="relative h-full pb-[100%] rounded-full overflow-hidden">
-                            <img src="/team-member-hao.png" alt="team-member-hao"/>
-                        </div>
-                        <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
-                            HAO
-                        </div>
+                <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
+                    <div id="image-container"
+                         class="relative h-full pb-[100%] rounded-full overflow-hidden">
+                        <img src="/team-member-hao.png" alt="team-member-hao"/>
                     </div>
-                    <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
-                        <div id="image-container"
-                             class="relative h-full pb-[100%] rounded-full overflow-hidden">
-                            <img src="/team-member-hao.png" alt="team-member-hao"/>
-                        </div>
-                        <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
-                            HAO
-                        </div>
+                    <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
+                        HAO
                     </div>
-                    <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
-                        <div id="image-container"
-                             class="relative h-full pb-[100%] rounded-full overflow-hidden">
-                            <img src="/team-member-hao.png" alt="team-member-hao"/>
-                        </div>
-                        <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
-                            HAO
-                        </div>
+                </div>
+                <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
+                    <div id="image-container"
+                         class="relative h-full pb-[100%] rounded-full overflow-hidden">
+                        <img src="/team-member-hao.png" alt="team-member-hao"/>
                     </div>
-                    <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
-                        <div id="image-container"
-                             class="relative h-full pb-[100%] rounded-full overflow-hidden">
-                            <img src="/team-member-hao.png" alt="team-member-hao"/>
-                        </div>
-                        <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
-                            HAO
-                        </div>
+                    <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
+                        HAO
                     </div>
-                    <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
-                        <div id="image-container"
-                             class="relative h-full pb-[100%] rounded-full overflow-hidden">
-                            <img src="/team-member-Eric.png" alt="team-member-hao"/>
-                        </div>
-                        <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
-                            Eric
-                        </div>
+                </div>
+                <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
+                    <div id="image-container"
+                         class="relative h-full pb-[100%] rounded-full overflow-hidden">
+                        <img src="/team-member-hao.png" alt="team-member-hao"/>
                     </div>
-                    <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
-                        <div id="image-container"
-                             class="relative h-full pb-[100%] rounded-full overflow-hidden">
-                            <img src="/team-member-hao.png" alt="team-member-hao"/>
-                        </div>
-                        <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
-                            HAO
-                        </div>
+                    <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
+                        HAO
+                    </div>
+                </div>
+                <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
+                    <div id="image-container"
+                         class="relative h-full pb-[100%] rounded-full overflow-hidden">
+                        <img src="/team-member-Eric.png" alt="team-member-hao"/>
+                    </div>
+                    <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
+                        Eric
+                    </div>
+                </div>
+                <div class="relative border-solid border-comb border-12 rounded-full overflow-hidden">
+                    <div id="image-container"
+                         class="relative h-full pb-[100%] rounded-full overflow-hidden">
+                        <img src="/team-member-hao.png" alt="team-member-hao"/>
+                    </div>
+                    <div class="absolute bottom-8 left-1/2 translate-x--1/2 z-20">
+                        HAO
                     </div>
                 </div>
             </div>
         </div>
-  <!-- for dynamic unocss    -->
+    </div>
+    <!-- for dynamic unocss    -->
     <span class="hidden notion-bg-default notion-bg-lightgray notion-bg-gray notion-bg-brown
                notion-bg-orange notion-bg-yellow notion-bg-green notion-bg-blue
                notion-bg-purple notion-bg-pink notion-bg-red"></span>
@@ -202,10 +213,16 @@ invoke(async () => {
     animation: shrink 2s forwards ease-in-out;
     animation-delay: 4s;
 }
-
+.slash-clip-path-left{
+    clip-path: polygon(0 0, 100% 0, 100% 37.5%, 52.5% 100%, 0 100%, 0 0);
+}
+.slash-clip-path-right{
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0% 100%, 0 100%, 0 65%);
+}
 @keyframes shrink {
     to {
         height: 0;
     }
 }
+
 </style>

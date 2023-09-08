@@ -43,6 +43,7 @@ export default defineConfig({
     rules: [
         ['max-h-screen', {'max-height': 'calc(var(--vh, 1vh) * 100)'}],
         ['h-screen', {height: 'calc(var(--vh, 1vh) * 100)'}],
+        ['w-screen', {width: 'calc(var(--vw, 1vw) * 100)'}],
     ],
     theme: <Theme>{
         colors: {
@@ -71,6 +72,10 @@ export default defineConfig({
             fonts: {
                 noto: 'Noto Sans TC',
                 Orbitron: 'Orbitron',
+                Inter:'Inter',
+                Heebo:'Heebo',
+                Anton:'Anton',
+                'Roboto_Mono':'Roboto Mono',
                 Roboto: [
                     {
                         name: 'Roboto',
