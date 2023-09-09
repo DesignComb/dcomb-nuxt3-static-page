@@ -5,20 +5,10 @@ const store = useMainStore()
 
 await useAsyncData('notionDB', () => store.fetchNotionDB())
 
-import { invoke,until,useIntersectionObserver } from '@vueuse/core'
 
-const target = ref(null)
-const targetIsVisible = ref(false)
 
-const { stop } = useIntersectionObserver(
-    target,
-    ([{ isIntersecting }], observerElement) => {
-        targetIsVisible.value = isIntersecting
-    },
-)
 import { useAnimate, useSwipe, useScrollLock  } from '@vueuse/core'
-const el = ref()
-const el2 = ref()
+
 const mobileHeader = ref()
 const swiperDownDetector = ref()
 const isMobileHeader = ref(false)
@@ -26,17 +16,8 @@ const isMobileHeader = ref(false)
 const {isSwiping, direction} = useSwipe(swiperDownDetector)
 const {isSwiping:headerIsSwiping, direction:headerSwipingDirection} = useSwipe(mobileHeader)
 
-invoke(async () => {
-    await until(targetIsVisible).toBe(true)
-    useAnimate(el, { transform: 'translateX(-200%) skewX(-45deg)' }, {
-        duration: 800,
-        fill:'forwards'
-    })
-    useAnimate(el2, { transform: 'translateX(100%) skewX(-45deg)' }, {
-        duration: 800,
-        fill:'forwards'
-    })
-})
+
+
 
 watch(isSwiping ,()=>{
     if(direction.value === 'down'){
@@ -61,10 +42,30 @@ watch(headerIsSwiping ,()=>{
     }
 })
 
+const clickOpenMobileHeader = () =>{
+    if(isMobileHeader.value){
+        useAnimate(mobileHeader, { transform: 'translateY(-100%)' }, {
+            duration: 800,
+            fill:'forwards'
+        })
+        setTimeout(()=>{
+            isMobileHeader.value = false
+            // document.body.style.overflow = 'auto';
+        },500)
+    }
+    else {
+        useAnimate(mobileHeader, { transform: 'translateY(0)' }, {
+            duration: 800,
+            fill:'forwards'
+        })
+        isMobileHeader.value = true
+        // document.body.style.overflow = 'hidden';
+    }
+}
 </script>
 <template>
     <div class="w-full min-h-screen flex flex-row flex-wrap justify-center items-center">
-        <div class="w-full h-screen flex flex-row flex-wrap justify-center items-center bg-comb px-8 py-6 md:px-20 md:py-16">
+        <div class="w-full h-screen flex flex-row flex-wrap justify-center items-center bg-comb px-8 py-6 mb-8 md:px-20 md:py-16">
             <div class="w-full max-w-content h-full relative flex justify-center items-center bg-white border-solid overflow-hidden border-#666 border-12px rounded-4.5rem">
 
                 <div ref="mobileHeader" class="md:hidden absolute top-0 translate-y-[-100%] w-full h-1/3 bg-comb:85 z-30">
@@ -85,7 +86,7 @@ watch(headerIsSwiping ,()=>{
                             </div>
                         </nuxt-link>
                     </div>
-                    <div ref="swiperDownDetector" class="md:hidden absolute flex justify-center w-full text-center py-2 top-100%">
+                    <div ref="swiperDownDetector" @click="clickOpenMobileHeader" class="md:hidden absolute cursor-pointer flex justify-center w-full text-center py-2 top-100%">
                         <div :class="isMobileHeader ? 'i-bx-chevrons-up ' : 'i-bx-chevrons-down'"
                             class="text-4xl transition-all duration-300 ease-in-out"></div>
                     </div>
@@ -100,20 +101,17 @@ watch(headerIsSwiping ,()=>{
             </div>
         </div>
 
-        <div class="w-full max-w-content relative pt-24 z-20">
-            <div class="relative">
-                <div ref="el" class=" absolute translate-x-[-95%] skew-x-[-45deg] left-1/2 w-48 py-10 mt--8 bg-white flex justify-end z-30">
-                    <span class="font-black text-[3rem] text-[#666]">|</span>
-                </div>
-                <div ref="el2" class=" absolute left-1/2 w-48 skew-x-[-45deg] py-10 mt--8 bg-white flex justify-start z-30">
-                    <span class="font-black text-[3rem] text-[#666]">|</span>
-                </div>
-                <h1 class="font-black italic tracking-wide text-stroke-1 text-stroke-black font-Roboto text-[4rem] text-comb:25 z-10">Projects</h1>
-                <h1 class="font-black text-[4rem] text-[#666] translate-y-[-135%] z-20">作品</h1>
-                <div ref="target"></div>
-            </div>
+        <div class="w-full max-w-content relative z-20">
 
-            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
+            <animate-section-expand-title>
+                <template #enTitle>
+                    Projects
+                </template>
+                <template #title>
+                    作品
+                </template>
+            </animate-section-expand-title>
+            <div class="relative mt-8 grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
                 <a v-for="item in store.getDBItemArr" :href="`/works/${item.id}`" :key="item.id">
                     <common-used-work-card>
                         <template #cover>
