@@ -1,0 +1,1 @@
+import{f as s,o,c as a,s as t,F as r,d as n}from"./entry.52255c9a.js";const p=s({__name:"sectionExpandTitle",setup(l){return(e,c)=>(o(),a(r,null,[t(e.$slots,"enTitle",{},()=>[n("Headline")]),t(e.$slots,"title",{},()=>[n("標題")])],64))}});export{p as _};
