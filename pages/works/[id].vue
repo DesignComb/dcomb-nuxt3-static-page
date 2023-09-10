@@ -75,29 +75,29 @@ const {
 <!--            </a>-->
 <!--        </div>-->
 
-        <div class="col-span-3 mt-12">
-            <h5 class="text-black mb-4">Others</h5>
-            <div
-                    class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
-                <NuxtLink v-for="item in store.getSimilarItems" :to="`/works/${item.id}`" external>
-                    <common-used-work-card>
-                        <template #cover>
-                            <img :src="getItemCover(item)" alt="cover"/>
-                        </template>
-                        <template #title>
-                            {{ getItemTitleText(item) }}
-                        </template>
-                        <template #tags>
-                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"
-                                 :class="`notion-bg-${tag.color}`"
-                                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
-                                {{ tag.name }}
-                            </div>
-                        </template>
-                    </common-used-work-card>
-                </NuxtLink>
-            </div>
-        </div>
+<!--        <div class="col-span-3 mt-12">-->
+<!--            <h5 class="text-black mb-4">Others</h5>-->
+<!--            <div-->
+<!--                    class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">-->
+<!--                <NuxtLink v-for="item in store.getSimilarItems" :to="`/works/${item.id}`" external>-->
+<!--                    <common-used-work-card>-->
+<!--                        <template #cover>-->
+<!--                            <img :src="getItemCover(item)" alt="cover"/>-->
+<!--                        </template>-->
+<!--                        <template #title>-->
+<!--                            {{ getItemTitleText(item) }}-->
+<!--                        </template>-->
+<!--                        <template #tags>-->
+<!--                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"-->
+<!--                                 :class="`notion-bg-${tag.color}`"-->
+<!--                                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">-->
+<!--                                {{ tag.name }}-->
+<!--                            </div>-->
+<!--                        </template>-->
+<!--                    </common-used-work-card>-->
+<!--                </NuxtLink>-->
+<!--            </div>-->
+<!--        </div>-->
 
 <!--    </div>-->
 </template>
