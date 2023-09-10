@@ -80,7 +80,7 @@ onMounted(() => {
         <div class="col-span-3 mt-12">
             <h5 class="text-black mb-4">Others</h5>
             <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
-                <nuxt-link v-for="item in store.getSimilarItems" :to="`/works/${item.id}`">
+                <nuxt-link v-for="item in store.getSimilarItems" :to="`/works/${item.id}`" replace no-rel>
                     <common-used-work-card>
                         <template #cover>
                             <img :src="getItemCover(item)" alt="cover"/>
