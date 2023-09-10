@@ -16,6 +16,11 @@ const {
     error: notionPageErr
 } = await useAsyncData('notionPage', () => store.fetchNotionPage(<string>route.params.id))
 
+onMounted(() => {
+    if (!notionPage.value) {
+        window.location.reload()
+    }
+})
 
 </script>
 
