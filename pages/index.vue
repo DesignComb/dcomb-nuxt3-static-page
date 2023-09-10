@@ -3,9 +3,6 @@ import {useMainStore} from "~/store"
 
 const store = useMainStore()
 
-await useAsyncData('notionDB', () => store.fetchNotionDB())
-
-
 
 import { useAnimate, useSwipe, useScrollLock  } from '@vueuse/core'
 

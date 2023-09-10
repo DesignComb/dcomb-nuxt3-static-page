@@ -5,6 +5,11 @@ const main = ref()
 const header = ref()
 const {directions} = useScroll(main)
 const {x, y} = useWindowScroll()
+import {useMainStore} from "~/store"
+
+const store = useMainStore()
+
+await useAsyncData('notionDB', () => store.fetchNotionDB())
 
 watch(y, (oV, nV) => {
         if (oV > nV) {
