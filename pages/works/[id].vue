@@ -14,11 +14,11 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
 const {
     data: notionPage,
     error: notionPageErr
-} = await useAsyncData('notionPage', () => store.fetchNotionPage(<string>route.params.id))
+} = await useAsyncData(<string>route.params.id, () => store.fetchNotionPage(<string>route.params.id))
 
 onMounted(() => {
     setTimeout(() =>{
-        if (!notionPage.value) {
+        if (!store.notionPage) {
             console.log('阿阿阿')
             window.location.reload()
         }
@@ -28,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:p-12 p-6 text-left">
+    <div class="w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:p-12 p-6 text-left" :key="route.params.id">
         <h1 class="col-span-3 md:text-[3.5rem] text-black">{{ getItemTitleText( notionPage ) }}</h1>
         <div class="col-span-3 md:col-span-2 md:pr-12">
             <common-used-browser-line>MY WEBSITE</common-used-browser-line>
@@ -76,11 +76,10 @@ onMounted(() => {
                 <div class="inline-block i-bxl-github vertical-sub text-3xl hover:text-black"></div>
             </a>
         </div>
-
         <div class="col-span-3 mt-12">
             <h5 class="text-black mb-4">Others</h5>
             <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
-                <nuxt-link v-for="item in store.getSimilarItems" :to="`/works/${item.id}`" replace no-rel>
+                <nuxt-link v-for="item in store.getSimilarItems" :to="`/works/${item.id}`" :key="item.id" no-rel>
                     <common-used-work-card>
                         <template #cover>
                             <img :src="getItemCover(item)" alt="cover"/>
@@ -99,7 +98,28 @@ onMounted(() => {
                 </nuxt-link>
             </div>
         </div>
-
+        <div class="col-span-3 mt-12">
+            <h5 class="text-black mb-4">Others2</h5>
+            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
+                <a v-for="item in store.getSimilarItems" :href="`/works/${item.id}`" :key="item.id">
+                    <common-used-work-card>
+                        <template #cover>
+                            <img :src="getItemCover(item)" alt="cover"/>
+                        </template>
+                        <template #title>
+                            {{ getItemTitleText(item) }}
+                        </template>
+                        <template #tags>
+                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"
+                                 :class="`notion-bg-${tag.color}`"
+                                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
+                                {{ tag.name }}
+                            </div>
+                        </template>
+                    </common-used-work-card>
+                </a>
+            </div>
+        </div>
     </div>
 </template>
 

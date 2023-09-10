@@ -30,6 +30,7 @@ export const useMainStore = defineStore('main', {
             return data
         },
         async fetchNotionPage(pageID: string): Promise<NotionPage>{
+            console.log('我有撈!')
             const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
                 method: 'GET',
                 credentials: 'include',
@@ -65,6 +66,7 @@ export const useMainStore = defineStore('main', {
             }
         },
         getSimilarItems(): any {
+            console.log(this.notionPage)
             if (this.notionDB && this.notionPage) {
                 // 1. 取得當前 notionPage 的 tags
                 const currentPageTags = getItemTagIds(this.notionPage)
