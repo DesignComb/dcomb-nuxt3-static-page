@@ -1,40 +1,40 @@
 <script setup>
 import {useScroll, watchDeep, whenever, useWindowScroll,useAnimate} from '@vueuse/core'
 
-// const main = ref()
-// const header = ref()
-// const {directions} = useScroll(main)
-// const {x, y} = useWindowScroll()
+const main = ref()
+const header = ref()
+const {directions} = useScroll(main)
+const {x, y} = useWindowScroll()
 
-// watch(y, (oV, nV) => {
-//         if (oV > nV) {
-//             // useAnimate(header, [
-//             //     {opacity: '0', transform: 'translateY(-100%)'},
-//             // ], {
-//             //     duration: 400,
-//             //     fill: 'forwards'
-//             // })
-//         } else if (oV < nV) {
-//             useAnimate(header, [
-//                 {opacity: '1', transform: 'translateY(0)'},
-//             ], {
-//                 duration: 400,
-//                 fill: 'forwards'
-//             })
-//         }
-//     }
-// )
+watch(y, (oV, nV) => {
+        if (oV > nV) {
+            // useAnimate(header, [
+            //     {opacity: '0', transform: 'translateY(-100%)'},
+            // ], {
+            //     duration: 400,
+            //     fill: 'forwards'
+            // })
+        } else if (oV < nV) {
+            useAnimate(header, [
+                {opacity: '1', transform: 'translateY(0)'},
+            ], {
+                duration: 400,
+                fill: 'forwards'
+            })
+        }
+    }
+)
 
 
 </script>
 
 <template>
 
-<!--    <div ref="header"-->
-<!--         :class="y === 0?'bg-transparent':'bg-white shadow-lg'"-->
-<!--         class="w-full hidden md:block fixed z-50 transition-all ease-in-out duration-400">-->
-<!--        <common-used-fixed-header/>-->
-<!--    </div>-->
+    <div ref="header"
+         :class="y === 0?'bg-transparent':'bg-white shadow-lg'"
+         class="w-full hidden md:block fixed z-50 transition-all ease-in-out duration-400">
+        <common-used-fixed-header/>
+    </div>
     <div ref="main" class="m-0 p-0 text-center">
         <!--        <common-used-marquee/>-->
 
