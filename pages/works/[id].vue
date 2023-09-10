@@ -9,7 +9,7 @@ import {useMainStore} from "~/store"
 
 const store = useMainStore()
 
-// await useAsyncData('notionDB', () => store.fetchNotionDB())
+await useAsyncData('notionDB', () => store.fetchNotionDB())
 
 const {
     data: notionPage,
@@ -17,10 +17,12 @@ const {
 } = await useAsyncData('notionPage', () => store.fetchNotionPage(<string>route.params.id))
 
 onMounted(() => {
-    if (!notionPage.value) {
-        console.log('阿阿阿')
-        window.location.reload()
-    }
+    setTimeout(() =>{
+        if (!notionPage.value) {
+            console.log('阿阿阿')
+            window.location.reload()
+        }
+    },100)
 })
 
 </script>
@@ -77,8 +79,7 @@ onMounted(() => {
 
         <div class="col-span-3 mt-12">
             <h5 class="text-black mb-4">Others</h5>
-            <div
-                    class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
+            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
                 <nuxt-link v-for="item in store.getSimilarItems" :to="`/works/${item.id}`">
                     <common-used-work-card>
                         <template #cover>
