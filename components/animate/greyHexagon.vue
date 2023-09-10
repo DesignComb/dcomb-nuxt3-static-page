@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="absolute left-8 bottom-10  w-56 h-56 scale-50 sm:scale-110 origin-bottom-left flex flex-col justify-end">
+    <div class="absolute left-8 bottom-10 w-56 h-56 scale-110 origin-bottom-left flex flex-col justify-end">
         <svg class="absolute -top-12 left-5 h-28 an-top" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 45.11 228.18">
             <title>資產 11</title>
             <g id="圖層_2" data-name="圖層 2">
