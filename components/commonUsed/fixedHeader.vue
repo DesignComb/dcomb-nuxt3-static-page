@@ -3,28 +3,28 @@
 </script>
 
 <template>
-    <div class="max-w-content px-12 py-3 flex justify-end">
-        <nuxt-link to="/" class="decoration-clip-border relative mr-6">
-            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
-                Home
-            </div>
-        </nuxt-link>
-        <nuxt-link to="/About" class="decoration-clip-border relative mr-6">
-            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
-                About
-            </div>
-        </nuxt-link>
-        <nuxt-link to="/Projects" class="decoration-clip-border relative mr-6">
-            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
-                Projects
-            </div>
-        </nuxt-link>
-        <nuxt-link to="/" class="decoration-clip-border relative mr-6">
-            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">
-                Contact
-            </div>
-        </nuxt-link>
-    </div>
+<!--    <div class="max-w-content px-12 py-3 flex justify-end">-->
+<!--        <nuxt-link to="/" class="decoration-clip-border relative mr-6">-->
+<!--            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">-->
+<!--                Home-->
+<!--            </div>-->
+<!--        </nuxt-link>-->
+<!--        <nuxt-link to="/About" class="decoration-clip-border relative mr-6">-->
+<!--            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">-->
+<!--                About-->
+<!--            </div>-->
+<!--        </nuxt-link>-->
+<!--        <nuxt-link to="/Projects" class="decoration-clip-border relative mr-6">-->
+<!--            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">-->
+<!--                Projects-->
+<!--            </div>-->
+<!--        </nuxt-link>-->
+<!--        <nuxt-link to="/" class="decoration-clip-border relative mr-6">-->
+<!--            <div class="decoration-clip-path italic font-bold tracking-wide relative px-10 py-1 hover:bg-comb hover:text-white transition hover:transition-delay-300 duration-500 ease-in-out border-box">-->
+<!--                Contact-->
+<!--            </div>-->
+<!--        </nuxt-link>-->
+<!--    </div>-->
 </template>
 
 <style scoped>
