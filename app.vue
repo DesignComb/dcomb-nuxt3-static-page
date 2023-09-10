@@ -1,6 +1,5 @@
 <script setup>
-import {useScroll, watchDeep, whenever} from '@vueuse/core'
-import {useAnimate} from "@vueuse/core/index";
+import {useScroll, watchDeep, whenever,useAnimate} from '@vueuse/core'
 
 const main = ref()
 const header = ref()
