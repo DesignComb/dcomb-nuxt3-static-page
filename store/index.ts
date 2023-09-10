@@ -1,11 +1,15 @@
 import notionJSON2HTML from "~/utils/notionJSON2HTML";
+import {computed} from "vue/dist/vue";
+import {getItemTagIds} from "~/utils/notionTransformData";
 
 interface NotionDBType {
     results?: any[];
 }
+
 interface NotionPageBlockType {
     results?: any[];
 }
+
 export const useMainStore = defineStore('main', {
     state: () => ({
         notionDB: null as NotionDBType | null,
@@ -21,7 +25,7 @@ export const useMainStore = defineStore('main', {
                     Accept: 'application/json',
                     'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
                 },
-                body:{
+                body: {
                     sorts: [
                         {
                             "property": "Sort",
@@ -70,9 +74,34 @@ export const useMainStore = defineStore('main', {
                 return this.notionDB?.results
             }
         },
-        getNotionPageBlockHtml() : any{
+        getNotionPageBlockHtml(): any {
             // const json: notionBlock[] = this.notionPageBlock?.results
             return this.notionPageBlock?.results?.map(notionJSON2HTML).join('');
-        }
+        },
+        getSimilarItems(): any {
+            if (this.notionDB && this.notionPage) {
+                // 1. 取得當前 notionPage 的 tags
+                const currentPageTags = getItemTagIds(this.notionPage)
+
+                // 2. 為每個 item 計算匹配的 tag 數量
+                const scoredItems = this.notionDB?.results?.map(item => {
+                    const itemTags = getItemTagIds(item);
+                    const commonTagsCount = itemTags.filter(tag => currentPageTags.includes(tag)).length;
+
+                    return {
+                        item: item,
+                        score: commonTagsCount
+                    };
+                });
+                // 3. 依據匹配的 tag 數量進行排序且過濾掉當前的 notionPage
+                const sortedItems = scoredItems.sort((a, b) => b.score - a.score)
+                    .filter(scoredItem => scoredItem.item.id !== this.notionPage.id)
+                    .map(scoredItem => scoredItem.item);
+
+                // 4. 返回匹配度最高的前三項
+                return sortedItems.slice(0, 3);
+            }
+            return [];
+        },
     }
 })
