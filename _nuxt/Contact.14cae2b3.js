@@ -1,1 +1,0 @@
-import{_ as n}from"./sectionExpandTitle.vue.2cabf642.js";import{_ as o,c as a,b as s,w as t,o as _,d as e}from"./entry.cdfdaa26.js";const r={},i={class:"w-full min-h-screen max-w-[1440px] mx-auto pt-8"};function l(m,d){const c=n;return _(),a("div",i,[s(c,null,{enTitle:t(()=>[e(" Contact Us ")]),title:t(()=>[e(" 聯絡我們 ")]),_:1})])}const x=o(r,[["render",l]]);export{x as default};
