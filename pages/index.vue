@@ -74,13 +74,14 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
         </div>
       </div>
     </div>
-<!--    <div class="border-y-solid border-1">-->
-<!--      <common-used-marquee-line>-->
-<!--        <div class="flex items-center my-0.5">-->
-<!--          PROJECTS <span class="text-comb text-xl ml-5 rotate-90">＊</span>-->
-<!--        </div>-->
-<!--      </common-used-marquee-line>-->
-<!--    </div>-->
+
+    <div class="w-full relative border-y-solid border-1">
+      <common-used-marquee-line>
+        <div class="flex items-center my-0.5">
+          SERVICE <span class="text-comb text-xl ml-5 rotate-90">＊</span>
+        </div>
+      </common-used-marquee-line>
+    </div>
     <div class="w-full max-w-content relative z-20">
 
       <animate-section-expand-title>
@@ -112,6 +113,14 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
         </nuxt-link>
       </div>
     </div>
+
+      <div class="w-full relative border-y-solid border-1">
+          <common-used-marquee-line>
+              <div class="flex items-center my-0.5">
+                  PROJECTS <span class="text-comb text-xl ml-5 rotate-90">＊</span>
+              </div>
+          </common-used-marquee-line>
+      </div>
 
     <div class="w-full max-w-content relative z-20">
       <animate-section-expand-title>

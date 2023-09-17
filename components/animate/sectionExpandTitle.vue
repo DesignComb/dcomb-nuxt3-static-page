@@ -27,7 +27,7 @@ invoke(async () => {
 </script>
 
 <template>
-    <div class="relative scale-[0.75] mb--16 pt-12 sm:scale-[1]">
+    <div class="relative scale-[0.75] mb--16 pt-12 sm:scale-[1] pointer-events-none">
         <div ref="el"
              class=" absolute translate-x-[-95%] skew-x-[-45deg] left-1/2 w-48 py-10 mt--8 bg-white flex justify-end z-30">
             <span class="font-black text-[3rem] text-[#666]">|</span>

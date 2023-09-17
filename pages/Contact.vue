@@ -12,13 +12,9 @@
                 聯絡我們
             </template>
         </animate-section-expand-title>
-        <!--    <div class="border-y-solid border-1">-->
-        <!--      <common-used-marquee-line>-->
-        <!--        <div class="flex items-center my-0.5">-->
-        <!--          PROJECTS <span class="text-comb text-xl ml-5 rotate-90">＊</span>-->
-        <!--        </div>-->
-        <!--      </common-used-marquee-line>-->
-        <!--    </div>-->
+        <div>
+            合作洽詢請來信： <a href="mailto:designcomb@gmail.com" class="text-base font-bold hover:op80">designcomb@gmail.com</a>
+        </div>
     </div>
 </template>
 
