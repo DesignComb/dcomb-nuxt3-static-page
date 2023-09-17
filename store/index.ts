@@ -2,12 +2,16 @@ import {NotionDB, NotionPage} from '@/utils/types/notionTypes'
 
 export const useMainStore = defineStore('main', {
     state: () => ({
+        isMobileHeader:false,
+
         notionDB: null as NotionDB | null,
         notionPage: null as NotionPage | null,
         // notionPageBlock: null as NotionPage | null,
     }),
+    persist: true,
     actions: {
         async fetchNotionDB() {
+            console.log('我有撈DB!')
             const data = await $fetch('https://api.notion.com/v1/databases/5ad9018ec1a9408cbc7781197832c880/query', {
                 method: 'POST',
                 credentials: 'include',
@@ -30,7 +34,7 @@ export const useMainStore = defineStore('main', {
             return data
         },
         async fetchNotionPage(pageID: string): Promise<NotionPage>{
-            console.log('我有撈!')
+            console.log(`我有撈!${pageID}`)
             const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
                 method: 'GET',
                 credentials: 'include',
@@ -44,6 +48,9 @@ export const useMainStore = defineStore('main', {
             }
             return data as NotionPage
         },
+        closeMobileHeader(){
+            this.isMobileHeader = false
+        }
         // async fetchNotionPageBlock(pageID: string) {
         //     const data = await $fetch(`https://api.notion.com/v1/blocks/${pageID}/children?page_size=999`, {
         //         method: 'GET',
@@ -66,7 +73,7 @@ export const useMainStore = defineStore('main', {
             }
         },
         getSimilarItems(): any {
-            console.log(this.notionPage)
+            // console.log(this.notionPage)
             if (this.notionDB && this.notionPage) {
                 // 1. 取得當前 notionPage 的 tags
                 const currentPageTags = getItemTagIds(this.notionPage)

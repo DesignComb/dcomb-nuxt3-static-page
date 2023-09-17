@@ -1,6 +1,7 @@
 import type {Theme} from '@unocss/preset-mini'
-import {defineConfig, presetAttributify, presetIcons, presetUno} from 'unocss'
+import {defineConfig, e, presetAttributify, presetIcons, presetUno} from 'unocss'
 import {presetWebFonts} from 'unocss'
+import {boxShadow} from "@unocss/preset-mini/theme";
 
 export default defineConfig({
     shortcuts: [
@@ -16,8 +17,6 @@ export default defineConfig({
             'bg-active': 'bg-gray-500:8',
             'bg-hover': 'bg-gray-500:20',
             'border-base': 'border-gray-400:10',
-            'bg-comb': 'bg-[#ffca84]',
-
 
             'tab-button': 'font-light op50 hover:op80 h-full px-4',
             'tab-button-active': 'op100 bg-gray-500:10',
@@ -34,7 +33,7 @@ export default defineConfig({
             'notion-bg-pink': 'bg-[#dd008133]',
             'notion-bg-red': 'bg-[#ff001a33]',
 
-            'max-w-content': 'max-w-[1440px] mx-auto'
+            'max-w-content': 'max-w-[1440px] mx-auto',
         },
         [/^(flex|grid)-center/g, () => 'justify-center items-center'],
         [/^(flex|grid)-x-center/g, () => 'justify-center'],
@@ -44,10 +43,12 @@ export default defineConfig({
         ['max-h-screen', {'max-height': 'calc(var(--vh, 1vh) * 100)'}],
         ['h-screen', {height: 'calc(var(--vh, 1vh) * 100)'}],
         ['w-screen', {width: 'calc(var(--vw, 1vw) * 100)'}],
+        ['shadow-card', {'box-shadow': '0px 4px 4px 0px #00000040'}],
     ],
     theme: <Theme>{
         colors: {
             'comb': '#ffca84',
+            'comb-light':'#F6EDDC',
             'ok': 'var(--c-ok)',
             'primary': 'var(--c-primary)',
             'primary-deep': 'var(--c-primary-deep)',
@@ -72,10 +73,10 @@ export default defineConfig({
             fonts: {
                 noto: 'Noto Sans TC',
                 Orbitron: 'Orbitron',
-                Inter:'Inter',
-                Heebo:'Heebo',
-                Anton:'Anton',
-                'Roboto_Mono':'Roboto Mono',
+                Inter: 'Inter',
+                Heebo: 'Heebo',
+                Anton: 'Anton',
+                'Roboto_Mono': 'Roboto Mono',
                 Roboto: [
                     {
                         name: 'Roboto',
