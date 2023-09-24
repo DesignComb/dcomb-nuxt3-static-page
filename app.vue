@@ -55,7 +55,7 @@ watch(y, (oV, nV) => {
         <common-used-fixed-header/>
     </div>
     <div ref="main" class="m-0 p-0 text-center bg-white">
-        <NuxtPage class="font-noto mt-4"/>
+        <NuxtPage class="font-noto mt-12"/>
     </div>
     <div>
         <common-used-footer/>
