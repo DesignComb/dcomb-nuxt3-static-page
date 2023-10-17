@@ -7,7 +7,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
 </script>
 <template>
     <div class="w-full min-h-screen flex flex-row flex-wrap justify-center items-center">
-        <div  class="w-full h-screen min-h-[60vw] xl:min-h-[956px] flex flex-row flex-wrap justify-center items-center
+        <div  class="w-full h-screen min-h-[60vw] xl:min-h-[768px] flex flex-row flex-wrap justify-center items-center
                 bg-comb mb-20 px-8 py-4 md:px-20 md:py-16">
             <div
                 class="w-full max-w-content h-full relative flex justify-center items-center bg-white border-solid overflow-hidden border-#666 border-12px rounded-4.5rem">
