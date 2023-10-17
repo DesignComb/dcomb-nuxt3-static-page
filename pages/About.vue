@@ -12,10 +12,10 @@
                 關於
             </template>
         </animate-section-expand-title>
-<!--        <div class="w-full relative pb-12">-->
-<!--            蜂巢設計 (design comb)-->
-<!--            是由兩個工程師組成的團隊，致力於網站開發-->
-<!--        </div>-->
+        <!--        <div class="w-full relative pb-12">-->
+        <!--            蜂巢設計 (design comb)-->
+        <!--            是由兩個工程師組成的團隊，致力於網站開發-->
+        <!--        </div>-->
         <div class="w-full max-w-content relative z-20 mb-12">
             <div class="flex flex-wrap w-full items-end">
                 <div class="w-full md:w-1/2 flex flex-wrap justify-end pl-12 pr-4 md:pl-20 pt-0 md:pt-0">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full  md:w-1/2 flex flex-wrap pr-12 pl-4 md:pr-20 pt-0 md:pt-0">
+                <div class="w-full  md:w-1/2 flex flex-wrap pr-12 pl-4 md:pr-20 pt-8 md:pt-0">
                     <div class="bg-#434343 w-full max-w-100 rounded-lg p-8 shadow-card text-right h-min">
                         <div class="text-3xl text-comb pb-8 font-bold">
                             客製化後台
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full  flex flex-wrap justify-center md:py-8 pl-12 pr-4 md:px-20">
+                <div class="w-full  flex flex-wrap justify-center md:py-8 pl-12 pr-4 pt-8 md:px-20">
                     <div class="bg-comb w-full max-w-100 md:w-1/2 rounded-lg p-8 shadow-card text-left">
                         <div class="text-3xl text-white pb-8 font-bold">
                             電商網頁
@@ -64,7 +64,7 @@
             <div class="relative grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch px-12 md:px-48">
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/team-member-Eric.png" alt="team-member-hao"/>
+                        <img class="px-12 lg:px-16" src="/images/team-member-Eric.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PATIENT</div>
@@ -74,7 +74,7 @@
                 </common-used-member-card>
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/team-member-hao.png" alt="team-member-hao"/>
+                        <img class="px-12 lg:px-16" src="/images/team-member-hao.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PUSH</div>

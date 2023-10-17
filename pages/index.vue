@@ -8,19 +8,20 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
 <template>
     <div class="w-full min-h-screen flex flex-row flex-wrap justify-center items-center">
         <div  class="w-full h-screen min-h-[60vw] xl:min-h-[956px] flex flex-row flex-wrap justify-center items-center
-                bg-comb mb-20 px-8 py-6  md:px-20 md:py-16">
+                bg-comb mb-20 px-8 py-4 md:px-20 md:py-16">
             <div
-                    class="w-full max-w-content h-full relative flex justify-center items-center bg-white border-solid overflow-hidden border-#666 border-12px rounded-4.5rem">
+                class="w-full max-w-content h-full relative flex justify-center items-center bg-white border-solid overflow-hidden border-#666 border-12px rounded-4.5rem">
 
                 <ClientOnly>
                     <animate-slogan-writing/>
                     <animate-two-hexagan-collapse/>
                     <animate-grey-hexagon/>
                 </ClientOnly>
-                <img class="absolute right-12 bottom-12 h-72" src="/scrollLine.svg" alt="scrollLine">
+                <img class="absolute right-12 bottom-12 h-72" src="/images/scrollLine.svg" alt="scrollLine">
                 <div class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"></div>
             </div>
         </div>
+
         <div class="w-full max-w-content relative z-20 mb-20">
 
             <animate-section-expand-title>
@@ -32,7 +33,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                 </template>
             </animate-section-expand-title>
             <div class="flex flex-wrap w-full items-end">
-                <div class="w-full md:w-1/2 flex flex-wrap justify-center md:justify-end pl-12 pr-4 md:pl-20 pt-0 md:pt-0">
+                <div class="w-full md:w-1/2 flex flex-wrap justify-end pl-12 pr-4 md:pl-20 pt-0 md:pt-0">
                     <div class="bg-white w-full max-w-100 rounded-lg p-8 shadow-card text-left">
                         <div class="text-3xl font-bold pb-8">
                             一頁式<br>形象網站
@@ -45,7 +46,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                         </div>
                     </div>
                 </div>
-                <div class="w-full  md:w-1/2 flex flex-wrap justify-center md:justify-start pr-12 pl-4 md:pr-20 pt-8 md:pt-0">
+                <div class="w-full  md:w-1/2 flex flex-wrap pr-12 pl-4 md:pr-20 pt-8 md:pt-0">
                     <div class="bg-#434343 w-full max-w-100 rounded-lg p-8 shadow-card text-right h-min">
                         <div class="text-3xl text-comb pb-8 font-bold">
                             客製化後台
@@ -58,7 +59,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                         </div>
                     </div>
                 </div>
-                <div class="w-full  flex flex-wrap justify-center pt-8 md:py-8 pl-12 pr-4 md:px-20">
+                <div class="w-full  flex flex-wrap justify-center md:py-8 pl-12 pr-4 pt-8 md:px-20">
                     <div class="bg-comb w-full max-w-100 md:w-1/2 rounded-lg p-8 shadow-card text-left">
                         <div class="text-3xl text-white pb-8 font-bold">
                             電商網頁
@@ -93,8 +94,8 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                 </template>
             </animate-section-expand-title>
             <div
-                    class="relative mt-8 grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
-                <nuxt-link v-for="item in store.getDBItemArr" :to="`/works/${item.id}`" :key="item.id">
+                class="relative mt-8 grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
+                <nuxt-link v-for="item in store.getDBItemArr" :to="`/Projects/${item.id}`" :key="item.id" external>
                     <common-used-work-card>
                         <template #cover>
                             <img :src="getItemCover(item)" alt="cover"/>
@@ -135,7 +136,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
             <div class="relative grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch px-12 md:px-48">
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/team-member-Eric.png" alt="team-member-hao"/>
+                        <img class="px-12 lg:px-16" src="/images/team-member-Eric.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PATIENT</div>
@@ -145,7 +146,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                 </common-used-member-card>
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/team-member-hao.png" alt="team-member-hao"/>
+                        <img class="px-12 lg:px-16" src="/images/team-member-hao.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PUSH</div>
@@ -157,7 +158,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
             </div>
         </div>
     </div>
-  <!-- for dynamic unocss    -->
+    <!-- for dynamic unocss    -->
     <span class="hidden notion-bg-default notion-bg-lightgray notion-bg-gray notion-bg-brown
                notion-bg-orange notion-bg-yellow notion-bg-green notion-bg-blue
                notion-bg-purple notion-bg-pink notion-bg-red"></span>

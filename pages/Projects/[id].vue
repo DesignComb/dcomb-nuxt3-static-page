@@ -17,19 +17,20 @@ const {
 } = await useAsyncData(<string>route.params.id, () => store.fetchNotionPage(<string>route.params.id))
 
 onMounted(() => {
-    setTimeout(() =>{
+    setTimeout(() => {
         if (!store.notionPage) {
-            console.log('阿阿阿')
+            // console.log('阿阿阿')
             window.location.reload()
         }
-    },100)
+    }, 100)
 })
 
 </script>
 
 <template>
-    <div class="w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:p-12 p-6 text-left" :key="route.params.id">
-        <h1 class="col-span-3 md:text-[3.5rem] text-black">{{ getItemTitleText( notionPage ) }}</h1>
+    <div class="w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 md:p-12 p-6 text-left"
+         :key="route.params.id">
+        <h1 class="col-span-3 md:text-[3.5rem] text-black">{{ getItemTitleText(notionPage) }}</h1>
         <div class="col-span-3 md:col-span-2 md:pr-12">
             <common-used-browser-line>MY WEBSITE</common-used-browser-line>
             <div class="text-left bg-white border-solid border-black border-1 h-[40rem] overflow-y-auto break-words">
@@ -39,12 +40,14 @@ onMounted(() => {
             </div>
         </div>
         <div class="col-span-3 md:col-span-1 md:pr-8 md:mt-0 mt-12 text-left text-sm tracking-wide leading-relaxed space-y-12">
-            <div>
+            <div v-if="getItemText(notionPage)">
                 <h4 class="text-black mb-4">INTRODUCTION</h4>
                 <div v-html="getItemText(notionPage)"></div>
             </div>
 
-            <a :href="notionPage?.properties?.Link?.url" target="_blank"
+            <a v-if="notionPage?.properties?.Link?.url"
+               :href="notionPage?.properties?.Link?.url"
+               target="_blank"
                class="btn-3d-flip relative block perspective-[2000rem] pr-12">
                 <span class="btn-3d-flip-box relative block w-full h-full transition duration-500 ease-in-out">
                     <span
@@ -58,7 +61,7 @@ onMounted(() => {
                 </span>
             </a>
 
-            <div>
+            <div v-if="notionPage?.properties?.Skill?.multi_select?.length > 0">
                 <h6 class="text-black mb-2">SKILLS</h6>
                 <span v-for="(tag,index) in notionPage?.properties?.Skill?.multi_select" :key="index"
                       :class="`notion-bg-${tag.color}`"
@@ -67,19 +70,20 @@ onMounted(() => {
                 </span>
             </div>
 
-            <div>
+            <div v-if="notionPage?.properties?.Update?.date?.start">
                 <h6 class="text-black">DATE</h6>
                 <span>{{ notionPage?.properties?.Update?.date?.start }}</span>
             </div>
 
-            <a :href="notionPage?.properties?.GitHub?.url" target="_blank" class="block cursor-pointer">
+            <a v-if="notionPage?.properties?.GitHub?.url"
+               :href="notionPage?.properties?.GitHub?.url" target="_blank" class="block cursor-pointer">
                 <div class="inline-block i-bxl-github vertical-sub text-3xl hover:text-black"></div>
             </a>
         </div>
         <div class="col-span-3 mt-12">
             <h5 class="text-black mb-4">Others</h5>
             <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">
-                <nuxt-link v-for="item in store.getSimilarItems" :to="`/works/${item.id}`" :key="item.id" external>
+                <nuxt-link v-for="item in store.getSimilarItems" :to="`/Projects/${item.id}`" :key="item.id" external>
                     <common-used-work-card>
                         <template #cover>
                             <img :src="getItemCover(item)" alt="cover"/>
@@ -98,28 +102,28 @@ onMounted(() => {
                 </nuxt-link>
             </div>
         </div>
-<!--        <div class="col-span-3 mt-12">-->
-<!--            <h5 class="text-black mb-4">Others2</h5>-->
-<!--            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">-->
-<!--                <a v-for="item in store.getSimilarItems" :href="`/works/${item.id}`" :key="item.id">-->
-<!--                    <common-used-work-card>-->
-<!--                        <template #cover>-->
-<!--                            <img :src="getItemCover(item)" alt="cover"/>-->
-<!--                        </template>-->
-<!--                        <template #title>-->
-<!--                            {{ getItemTitleText(item) }}-->
-<!--                        </template>-->
-<!--                        <template #tags>-->
-<!--                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"-->
-<!--                                 :class="`notion-bg-${tag.color}`"-->
-<!--                                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">-->
-<!--                                {{ tag.name }}-->
-<!--                            </div>-->
-<!--                        </template>-->
-<!--                    </common-used-work-card>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        <div class="col-span-3 mt-12">-->
+        <!--            <h5 class="text-black mb-4">Others2</h5>-->
+        <!--            <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-12 justify-center flex-items-stretch">-->
+        <!--                <a v-for="item in store.getSimilarItems" :href="`/works/${item.id}`" :key="item.id">-->
+        <!--                    <common-used-work-card>-->
+        <!--                        <template #cover>-->
+        <!--                            <img :src="getItemCover(item)" alt="cover"/>-->
+        <!--                        </template>-->
+        <!--                        <template #title>-->
+        <!--                            {{ getItemTitleText(item) }}-->
+        <!--                        </template>-->
+        <!--                        <template #tags>-->
+        <!--                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"-->
+        <!--                                 :class="`notion-bg-${tag.color}`"-->
+        <!--                                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">-->
+        <!--                                {{ tag.name }}-->
+        <!--                            </div>-->
+        <!--                        </template>-->
+        <!--                    </common-used-work-card>-->
+        <!--                </a>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
 </template>
 

@@ -46,7 +46,7 @@ watch(y, (oV, nV) => {
         enter-to-class="opacity-100"
     >
         <div v-if="!store.isMobileHeader"
-             class="md:hidden fixed z-99 top-1 left-1/2 translate-x--1/2 i-bx-chevrons-down
+             class="md:hidden fixed z-99 top-5 left-1/2 translate-x--1/2 i-bx-chevrons-down
       text-4xl text-white mix-blend-difference transition-opacity duration-2000 pointer-events-none"></div>
     </transition>
     <div ref="header"

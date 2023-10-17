@@ -17,7 +17,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
             </template>
         </animate-section-expand-title>
         <div class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
-            <nuxt-link v-for="item in store.getDBItemArr" :href="`/works/${item.id}`" :key="item.id">
+            <nuxt-link v-for="item in store.getDBItemArr" :to="`/Projects/${item.id}`" :key="item.id" external>
                 <common-used-work-card>
                     <template #cover>
                         <img :src="getItemCover(item)" alt="cover"/>
