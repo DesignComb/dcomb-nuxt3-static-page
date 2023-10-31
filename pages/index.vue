@@ -104,7 +104,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                             {{ getItemTitleText(item) }}
                         </template>
                         <template #tags>
-                            <div v-for="(tag,index) in item?.properties?.Tags?.multi_select"
+                            <div v-for="(tag,index) in item?.properties?.Skill?.multi_select"
                                  :class="`notion-bg-${tag.color}`"
                                  class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
                                 {{ tag.name }}

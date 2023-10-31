@@ -14,7 +14,7 @@
     "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@types/node": "^18.17.3",
     "@unocss/nuxt": "^0.55.2",
-    "nuxt": "^3.6.5",
+    "nuxt": "^3.8.0",
     "typescript": "^5.1.6"
   },
   "overrides": {

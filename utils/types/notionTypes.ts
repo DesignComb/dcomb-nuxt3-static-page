@@ -80,7 +80,15 @@ interface DateProperty {
 }
 
 // Properties 型別合併
-type PropertyTypes = MultiSelectProperty | FilesProperty | NumberProperty | UrlProperty | TextProperty | TitleProperty | DateProperty;
+type PropertyTypes =
+    MultiSelectProperty
+    | FilesProperty
+    | NumberProperty
+    | UrlProperty
+    | TextProperty
+    | TitleProperty
+    | DateProperty;
+
 interface NotionPageProperties {
     Tags?: MultiSelectProperty
     Cover?: FilesProperty
@@ -90,10 +98,13 @@ interface NotionPageProperties {
     ProjectImage?: FilesProperty
     Client?: TextProperty
     Link?: UrlProperty
+    LinkRemarks?: TextProperty
     Text?: TextProperty
     Name?: TitleProperty
     Update?: DateProperty
+    Contributions?:TextProperty
 }
+
 export interface NotionPage {
     object: "page";
     id: string;

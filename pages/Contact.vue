@@ -13,7 +13,7 @@
             </template>
         </animate-section-expand-title>
         <div>
-            合作洽詢請來信： <a href="mailto:designcomb@gmail.com" class="text-base font-bold hover:op80">designcomb2021@gmail.com</a>
+            合作洽詢請來信： <a href="mailto:designcomb2021@gmail.com" class="text-base font-bold hover:op80">designcomb2021@gmail.com</a>
         </div>
     </div>
 </template>
