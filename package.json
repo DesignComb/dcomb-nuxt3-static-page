@@ -22,8 +22,9 @@
     "vue": "latest"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.11",
+    "@pinia/nuxt": "^0.5.1",
     "@vueuse/core": "^10.4.1",
-    "pinia": "^2.1.6"
+    "pinia": "^2.1.6",
+    "unocss": "^0.57.1"
   }
 }
