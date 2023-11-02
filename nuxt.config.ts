@@ -12,4 +12,7 @@ export default defineNuxtConfig({
             ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
         ],
     },
+    site: {
+        url: 'https://web.dco.tw'
+    }
 })
