@@ -4,7 +4,7 @@ export default defineNuxtConfig({
         // baseURL: '/dcomb-nuxt3-static-page/', // baseURL: '/<repository>/'
     },
     devtools: {enabled: true},
-    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@unocss/nuxt', 'nuxt-simple-sitemap'],
+    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@unocss/nuxt', 'nuxt-simple-sitemap', 'nuxt-gtag'],
     pinia: {
         autoImports: [
             // automatically imports `defineStore`
@@ -14,5 +14,8 @@ export default defineNuxtConfig({
     },
     site: {
         url: 'https://web.dco.tw'
+    },
+    gtag:{
+        id:'G-NENSXF1GL6'
     }
 })
