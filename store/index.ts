@@ -1,4 +1,4 @@
-import {NotionDB, NotionPage} from '@/utils/types/notionTypes'
+import type {NotionDB, NotionPage} from '@/utils/types/notionTypes'
 
 export const useMainStore = defineStore('main', {
     state: () => ({

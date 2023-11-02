@@ -19,6 +19,9 @@ export const getItemLinkRemarks = (notionItem?: NotionPage | null) => {
     return notionItem?.properties?.LinkRemarks?.text.map(item => item.plain_text.replace(/\n/g, "<br>")).join('') || '';
 }
 
+export const getItemClient = (notionItem?: NotionPage | null) => {
+    return notionItem?.properties?.Client?.text.map(item => item.plain_text.replace(/\n/g, "<br>")).join('') || '';
+}
 export const getItemContributions = (notionItem?: NotionPage | null) => {
     return notionItem?.properties?.Contributions?.text.map(item => item.plain_text.replace(/\n/g, "<br>")).join('') || '';
 }

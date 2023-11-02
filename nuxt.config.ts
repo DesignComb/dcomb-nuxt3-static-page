@@ -4,7 +4,7 @@ export default defineNuxtConfig({
         // baseURL: '/dcomb-nuxt3-static-page/', // baseURL: '/<repository>/'
     },
     devtools: {enabled: true},
-    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@unocss/nuxt'],
+    modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@unocss/nuxt', 'nuxt-simple-sitemap'],
     pinia: {
         autoImports: [
             // automatically imports `defineStore`

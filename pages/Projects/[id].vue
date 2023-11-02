@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import type {NotionPage} from '@/utils/types/notionTypes'
 
-import {getItemContributions, getItemLinkRemarks, getItemProjectImage, getItemText} from "~/utils/notionTransformData";
+import {
+    getItemClient,
+    getItemContributions,
+    getItemLinkRemarks,
+    getItemProjectImage,
+    getItemText
+} from "~/utils/notionTransformData";
 
 const route = useRoute()
 
@@ -71,6 +77,11 @@ useSeoMeta({
                 </span>
                 </a>
                 <div class="text-xs mt-2">{{ getItemLinkRemarks(notionPage) }}</div>
+            </div>
+
+            <div v-if="getItemClient(notionPage)">
+                <h6 class="text-black mb-4">CLIENT</h6>
+                <div v-html="getItemClient(notionPage)"></div>
             </div>
 
             <div v-if="getItemContributions(notionPage)">
