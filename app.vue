@@ -11,9 +11,9 @@ const store = useMainStore()
 useSeoMeta({
     title: '蜂巢設計 Design Comb',
     ogTitle: '蜂巢設計 Design Comb',
-    description: '蜂巢設計是由工程師組成的網站開發團隊，擅長製作精緻的互動式網站，重視使用者體驗的後台系統等',
-    ogDescription: '蜂巢設計是由工程師組成的網站開發團隊，擅長製作精緻的互動式網站，重視使用者體驗的後台系統等',
-    ogImage: 'https://example.com/image.png',
+    description: '蜂巢設計是由工程師組成的網站開發團隊，擅長製作精緻的互動式網站，重視使用者體驗的後台系統等。',
+    ogDescription: '蜂巢設計是由工程師組成的網站開發團隊，擅長製作精緻的互動式網站，重視使用者體驗的後台系統等。',
+    ogImage: 'https://dcomb-web.s3.ap-northeast-1.amazonaws.com/design-comb-cover.png',
 })
 const {
     data: notionDB,

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type {NotionPage} from '@/utils/types/notionTypes'
+
 import {getItemContributions, getItemLinkRemarks, getItemProjectImage, getItemText} from "~/utils/notionTransformData";
 
 const route = useRoute()
@@ -23,6 +25,13 @@ onMounted(() => {
     }, 100)
 })
 
+useSeoMeta({
+    title: `${getItemTitleText(notionPage.value)} | 蜂巢設計 Design Comb`,
+    ogTitle: `${getItemTitleText(notionPage.value)} | 蜂巢設計 Design Comb`,
+    description: `${getItemText(notionPage.value)}`,
+    ogDescription: `${getItemText(notionPage.value)}`,
+    ogImage: `${getItemCover(notionPage.value)}`,
+})
 </script>
 
 <template>
