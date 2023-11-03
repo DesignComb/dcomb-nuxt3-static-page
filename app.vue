@@ -100,6 +100,7 @@ a:hover {
     box-sizing: border-box;
     font-family: 'Noto Sans TC', sans-serif;
     overflow-x: hidden;
+    background-color: white;
 }
 
 ul, ol, li {
