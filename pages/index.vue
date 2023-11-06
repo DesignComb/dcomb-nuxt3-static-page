@@ -18,7 +18,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                     <animate-grey-hexagon/>
                 </ClientOnly>
                 <NuxtImg class="absolute right-12 bottom-12 h-72" src="/images/scrollLine.svg" alt="scrollLine"/>
-                <NuxtImg class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"/></div>
+                <NuxtImg class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"/>
             </div>
         </div>
 
