@@ -17,8 +17,8 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                     <animate-two-hexagan-collapse/>
                     <animate-grey-hexagon/>
                 </ClientOnly>
-                <img class="absolute right-12 bottom-12 h-72" src="/images/scrollLine.svg" alt="scrollLine">
-                <div class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"></div>
+                <NuxtImg class="absolute right-12 bottom-12 h-72" src="/images/scrollLine.svg" alt="scrollLine"/>
+                <NuxtImg class="absolute right-10 bottom-12 w-8 h-72 bg-white z-20 an-show-line"/></div>
             </div>
         </div>
 
@@ -98,7 +98,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                 <nuxt-link v-for="item in store.getDBItemArr" :to="`/Projects/${item.id}`" :key="item.id" external>
                     <common-used-work-card>
                         <template #cover>
-                            <img :src="getItemCover(item)" alt="cover"/>
+                            <NuxtImg :src="getItemCover(item)" alt="cover"/>
                         </template>
                         <template #title>
                             {{ getItemTitleText(item) }}
@@ -136,7 +136,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
             <div class="relative grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch px-12 md:px-48">
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/images/team-member-Eric.png" alt="team-member-hao"/>
+                        <NuxtImg class="px-12 lg:px-16" src="/images/team-member-Eric.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PATIENT</div>
@@ -146,7 +146,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                 </common-used-member-card>
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/images/team-member-hao.png" alt="team-member-hao"/>
+                        <NuxtImg class="px-12 lg:px-16" src="/images/team-member-hao.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PUSH</div>

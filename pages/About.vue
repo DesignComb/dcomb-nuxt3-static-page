@@ -64,7 +64,7 @@
             <div class="relative grid xl:grid-cols-2 lg:grid-cols-2 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch px-12 md:px-48">
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/images/team-member-Eric.png" alt="team-member-hao"/>
+                        <NuxtImg class="px-12 lg:px-16" src="/images/team-member-Eric.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PATIENT</div>
@@ -74,7 +74,7 @@
                 </common-used-member-card>
                 <common-used-member-card>
                     <template #avatar>
-                        <img class="px-12 lg:px-16" src="/images/team-member-hao.png" alt="team-member-hao"/>
+                        <NuxtImg class="px-12 lg:px-16" src="/images/team-member-hao.png" alt="team-member-hao"/>
                     </template>
                     <template #decoration>
                         <div class="absolute top-[12%] left-[40%] text-xl font-bold mix-blend-screen">PUSH</div>

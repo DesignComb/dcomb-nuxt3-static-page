@@ -59,7 +59,7 @@ export default function (block: notionBlock): string {
             return `<p>${block.paragraph.text.map(renderText).join('')}</p>`;
         case 'image':
             return `<div id="image-container" class="relative w-full pb-[56.25%] overflow-hidden">
-                        <img src="${block.image.file.url}" alt=""/>
+                        <NuxtImg src="${block.image.file.url}" alt=""/>
                     </div>`;
         default:
             return ``;

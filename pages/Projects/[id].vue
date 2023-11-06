@@ -49,7 +49,7 @@ useSeoMeta({
             <div class="relative h-[calc(100%-2rem)] min-h-100">
                 <div class="text-left bg-white border-solid border-black border-1 absolute top-0 left-0 right-0 bottom-0 overflow-y-auto break-words">
                     <div>
-                        <img class="w-full" v-for="item in getItemProjectImage(notionPage)" :src="item" alt="cover"/>
+                        <NuxtImg class="w-full" v-for="item in getItemProjectImage(notionPage)" :src="item" alt="cover"/>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@ useSeoMeta({
                 <nuxt-link v-for="item in store.getSimilarItems" :to="`/Projects/${item.id}`" :key="item.id" external>
                     <common-used-work-card>
                         <template #cover>
-                            <img :src="getItemCover(item)" alt="cover"/>
+                            <NuxtImg :src="getItemCover(item)" alt="cover"/>
                         </template>
                         <template #title>
                             {{ getItemTitleText(item) }}
