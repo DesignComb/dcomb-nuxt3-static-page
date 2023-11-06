@@ -11,7 +11,7 @@ export const useMainStore = defineStore('main', {
     persist: true,
     actions: {
         async fetchNotionDB() {
-            console.log('我有撈DB!')
+            // console.log('我有撈DB!')
             const data = await $fetch('https://api.notion.com/v1/databases/5ad9018ec1a9408cbc7781197832c880/query', {
                 method: 'POST',
                 credentials: 'include',
@@ -34,7 +34,7 @@ export const useMainStore = defineStore('main', {
             return data
         },
         async fetchNotionPage(pageID: string): Promise<NotionPage>{
-            console.log(`我有撈!${pageID}`)
+            // console.log(`我有撈!${pageID}`)
             const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
                 method: 'GET',
                 credentials: 'include',
