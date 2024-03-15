@@ -68,30 +68,54 @@ const filteredDBItem = computed(() => {
         </div>
       </div>
     </div>
-    <!--      {{store.getDBItemAllTags}}-->
-    <div
+    <TransitionGroup name="projects" tag="div"
         class="relative grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 md:gap-12 justify-center flex-items-stretch p-12 md:p-20 pt-0 md:pt-0">
-      <nuxt-link v-for="item in filteredDBItem" :to="`/Projects/${item.id}`" :key="item.id" external>
-        <common-used-work-card>
-          <template #cover>
-            <NuxtImg :src="getItemCover(item)" alt="cover"/>
-          </template>
-          <template #title>
-            {{ getItemTitleText(item) }}
-          </template>
-          <template #tags>
-            <div v-for="(tag,index) in item?.properties?.Skill?.multi_select"
-                 :class="`notion-bg-${tag.color}`"
-                 class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
-              {{ tag.name }}
-            </div>
-          </template>
-        </common-used-work-card>
-      </nuxt-link>
-    </div>
+        <div v-for="item in filteredDBItem" :key="item.id" class="relative">
+          <nuxt-link :to="`/Projects/${item.id}`" external>
+            <common-used-work-card>
+              <template #cover>
+                <NuxtImg :src="getItemCover(item)" alt="cover"/>
+              </template>
+              <template #title>
+                {{ getItemTitleText(item) }}
+              </template>
+              <template #tags>
+                <div v-for="(tag,index) in item?.properties?.Skill?.multi_select"
+                     :class="`notion-bg-${tag.color}`"
+                     class="inline-flex pt-0.5 pb-1 px-3 mr-1.5 mb-1.5 text-[0.75rem] shadow-md text-black rounded-full border-solid border-[#666] border-2">
+                  {{ tag.name }}
+                </div>
+              </template>
+            </common-used-work-card>
+          </nuxt-link>
+        </div>
+    </TransitionGroup>
   </div>
 </template>
 
 <style scoped>
+.projects-move {
+  transition: all .5s ease-in-out
+}
+.projects-enter-active{
+  transition: all .5s ease-in-out
+}
+.projects-leave-active {
+  position: absolute;
+}
 
+.projects-enter-from{
+  opacity: 0;
+  transform: translateX(30px);
+}
+.projects-enter-to{
+  opacity: 1;
+}
+.projects-leave-from {
+  opacity: 0;
+}
+.projects-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
 </style>
