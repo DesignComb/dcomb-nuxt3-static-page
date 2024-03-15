@@ -98,5 +98,18 @@ export const useMainStore = defineStore('main', {
             }
             return [];
         },
+        getDBItemAllTags(): any{
+            let skills:any = []
+            if (this.notionDB) {
+                this.notionDB?.results.forEach((res)=>{
+                    res?.properties.Skill?.multi_select.forEach((item)=>{
+                        if(!skills.some((obj:any) => obj.id === item.id)){
+                            skills.push(item)
+                        }
+                    })
+                })
+            }
+            return skills
+        }
     }
 })
