@@ -35,7 +35,7 @@ invoke(async () => {
         <div ref="el2" class=" absolute left-1/2 w-48 skew-x-[-45deg] py-10 mt--8 bg-white flex justify-start z-30">
             <span class="font-black text-[3rem] text-[#666]">|</span>
         </div>
-        <h1 class="font-black italic tracking-wide text-stroke-1 text-stroke-black font-Roboto text-[4rem] text-comb:25 z-10">
+        <h1 class="font-black italic tracking-wide font-Roboto text-[4rem] text-[#FFF2E0] z-10 title-en">
             <slot name="enTitle">Headline</slot>
         </h1>
         <h1 class="font-black text-[4rem] text-[#666] translate-y-[-135%] z-20">
@@ -46,5 +46,15 @@ invoke(async () => {
 </template>
 
 <style scoped>
-
+.title-en {
+    text-shadow:
+        -1px -1px 0 black,
+         1px -1px 0 black,
+        -1px  1px 0 black,
+         1px  1px 0 black,
+         0   -1px 0 black,
+         0    1px 0 black,
+        -1px  0   0 black,
+         1px  0   0 black;
+}
 </style>

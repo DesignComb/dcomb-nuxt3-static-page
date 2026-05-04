@@ -74,7 +74,7 @@ const filteredDBItem = computed(() => {
           <nuxt-link :to="`/Projects/${item.id}`" external>
             <common-used-work-card>
               <template #cover>
-                <NuxtImg :src="getItemCover(item)" alt="cover"/>
+                <common-used-fallback-img :src="getItemCover(item)" alt="cover"/>
               </template>
               <template #title>
                 {{ getItemTitleText(item) }}

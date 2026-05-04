@@ -81,7 +81,7 @@ const headerLink = [
                    class="relative decoration-incline-container">
             <div
                     class="decoration-incline-line border-box italic font-Roboto font-bold text-base tracking-wider relative px-10 py-1">
-                <span class="text-stroke-0.5">{{ link.name }}</span>
+                <span>{{ link.name }}</span>
             </div>
         </nuxt-link>
     </div>
@@ -142,10 +142,18 @@ const headerLink = [
     transition: all 0.3s ease-in;
 }
 .router-link-active span,.decoration-incline-line:hover span {
-    -webkit-text-stroke-color: black;
     color: #FFF2E0;
     font-size: 1.5rem;
     font-weight: 900;
     transition: all 0.3s ease-in;
+    text-shadow:
+        -0.75px -0.75px 0 black,
+         0.75px -0.75px 0 black,
+        -0.75px  0.75px 0 black,
+         0.75px  0.75px 0 black,
+         0      -0.75px 0 black,
+         0       0.75px 0 black,
+        -0.75px  0      0 black,
+         0.75px  0      0 black;
 }
 </style>

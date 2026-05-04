@@ -59,8 +59,8 @@ interface UrlProperty {
 
 interface TextProperty {
     id: string;
-    type: "text";
-    text: TextContent[];
+    type: "rich_text";
+    rich_text: TextContent[];
 }
 
 interface TitleProperty {

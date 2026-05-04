@@ -98,7 +98,7 @@ await useAsyncData('notionDB', () => store.fetchNotionDB())
                 <nuxt-link v-for="item in store.getDBItemArr" :to="`/Projects/${item.id}`" :key="item.id" external>
                     <common-used-work-card>
                         <template #cover>
-                            <NuxtImg :src="getItemCover(item)" alt="cover"/>
+                            <common-used-fallback-img :src="getItemCover(item)" alt="cover"/>
                         </template>
                         <template #title>
                             {{ getItemTitleText(item) }}

@@ -26,6 +26,9 @@ export default defineNuxtConfig({
         id: 'G-NENSXF1GL6'
     },
     image: {
-        domains: ['dcomb-web.s3.ap-northeast-1.amazonaws.com']
+        domains: [
+            'dcomb-web.s3.ap-northeast-1.amazonaws.com',
+            'dcomb-web-image.s3.ap-northeast-1.amazonaws.com'
+        ]
     }
 })

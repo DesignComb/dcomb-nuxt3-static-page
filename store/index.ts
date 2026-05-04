@@ -12,12 +12,13 @@ export const useMainStore = defineStore('main', {
     actions: {
         async fetchNotionDB() {
             // console.log('我有撈DB!')
-            const data = await $fetch('https://api.notion.com/v1/databases/5ad9018ec1a9408cbc7781197832c880/query', {
+            const data = await $fetch('https://api.notion.com/v1/databases/64be8f5b7e454a53b59f0f4561c0287a/query', {
                 method: 'POST',
-                credentials: 'include',
+
                 headers: {
                     Accept: 'application/json',
-                    'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
+                    'Notion-Version': '2022-06-28',
+                    'Authorization': 'Bearer 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'
                 },
                 body: {
                     sorts: [
@@ -37,10 +38,11 @@ export const useMainStore = defineStore('main', {
             // console.log(`我有撈!${pageID}`)
             const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
                 method: 'GET',
-                credentials: 'include',
+
                 headers: {
                     Accept: 'application/json',
-                    'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
+                    'Notion-Version': '2022-06-28',
+                    'Authorization': 'Bearer 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'
                 }
             })
             if (data) {
@@ -57,7 +59,8 @@ export const useMainStore = defineStore('main', {
         //         credentials: 'include',
         //         headers: {
         //             Accept: 'application/json',
-        //             'Authorization': 'Bearer secret_8Ujk50jsgGBNH8x1D8pi3DKB1ppeIRHAs9XNdMCoyog'
+        //             'Notion-Version': '2022-06-28',
+        //             'Authorization': 'Bearer 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'
         //         }
         //     })
         //     if (data) {
@@ -69,7 +72,9 @@ export const useMainStore = defineStore('main', {
     getters: {
         getDBItemArr(): any {
             if (this.notionDB) {
-                return this.notionDB?.results
+                return this.notionDB?.results.filter(
+                    (item: any) => item.properties?.Name?.title?.length > 0
+                )
             }
         },
         getSimilarItems(): any {
