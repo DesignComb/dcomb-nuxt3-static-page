@@ -11,23 +11,8 @@ export const useMainStore = defineStore('main', {
     persist: true,
     actions: {
         async fetchNotionDB() {
-            // console.log('我有撈DB!')
-            const data = await $fetch('https://api.notion.com/v1/databases/64be8f5b7e454a53b59f0f4561c0287a/query', {
+            const data = await $fetch('/api/notion-db', {
                 method: 'POST',
-
-                headers: {
-                    Accept: 'application/json',
-                    'Notion-Version': '2022-06-28',
-                    'Authorization': 'Bearer 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'
-                },
-                body: {
-                    sorts: [
-                        {
-                            "property": "Sort",
-                            "direction": "ascending"
-                        }
-                    ]
-                }
             })
             if (data) {
                 this.notionDB = data as NotionDB
@@ -35,15 +20,9 @@ export const useMainStore = defineStore('main', {
             return data
         },
         async fetchNotionPage(pageID: string): Promise<NotionPage>{
-            // console.log(`我有撈!${pageID}`)
-            const data = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
+            const data = await $fetch('/api/notion-page', {
                 method: 'GET',
-
-                headers: {
-                    Accept: 'application/json',
-                    'Notion-Version': '2022-06-28',
-                    'Authorization': 'Bearer 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'
-                }
+                params: { id: pageID }
             })
             if (data) {
                 this.notionPage = data as NotionPage
@@ -53,21 +32,6 @@ export const useMainStore = defineStore('main', {
         closeMobileHeader(){
             this.isMobileHeader = false
         }
-        // async fetchNotionPageBlock(pageID: string) {
-        //     const data = await $fetch(`https://api.notion.com/v1/blocks/${pageID}/children?page_size=999`, {
-        //         method: 'GET',
-        //         credentials: 'include',
-        //         headers: {
-        //             Accept: 'application/json',
-        //             'Notion-Version': '2022-06-28',
-        //             'Authorization': 'Bearer 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'
-        //         }
-        //     })
-        //     if (data) {
-        //         this.notionPageBlock = data
-        //     }
-        //     return data
-        // },
     },
     getters: {
         getDBItemArr(): any {

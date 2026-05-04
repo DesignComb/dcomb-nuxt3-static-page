@@ -3,6 +3,14 @@ export default defineNuxtConfig({
     app: {
         // baseURL: '/dcomb-nuxt3-static-page/', // baseURL: '/<repository>/'
     },
+    runtimeConfig: {
+        notionApiKey: process.env.NOTION_API_KEY || '',
+    },
+    nitro: {
+        prerender: {
+            failOnError: false,
+        },
+    },
     devtools: {enabled: true},
     modules: [
         '@pinia/nuxt',

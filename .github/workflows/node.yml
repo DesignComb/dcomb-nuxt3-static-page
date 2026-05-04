@@ -26,6 +26,8 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run generate
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
