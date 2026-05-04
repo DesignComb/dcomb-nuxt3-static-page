@@ -1,6 +1,6 @@
 export default defineEventHandler(async () => {
     const config = useRuntimeConfig()
-    return await $fetch('https://api.notion.com/v1/databases/64be8f5b7e454a53b59f0f4561c0287a/query', {
+    const data: any = await $fetch('https://api.notion.com/v1/databases/64be8f5b7e454a53b59f0f4561c0287a/query', {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -16,4 +16,12 @@ export default defineEventHandler(async () => {
             ]
         }
     })
+
+    // Fix image URLs at build time
+    for (const item of data.results) {
+        await fixFileUrls(item.properties?.Cover?.files)
+        await fixFileUrls(item.properties?.ProjectImage?.files)
+    }
+
+    return data
 })

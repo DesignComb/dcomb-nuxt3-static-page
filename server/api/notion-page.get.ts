@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
         throw createError({ statusCode: 400, message: 'Missing page id' })
     }
     const config = useRuntimeConfig()
-    return await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
+    const data: any = await $fetch(`https://api.notion.com/v1/pages/${pageID}`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -13,4 +13,10 @@ export default defineEventHandler(async (event) => {
             'Authorization': `Bearer ${config.notionApiKey}`
         }
     })
+
+    // Fix image URLs at build time
+    await fixFileUrls(data.properties?.Cover?.files)
+    await fixFileUrls(data.properties?.ProjectImage?.files)
+
+    return data
 })
